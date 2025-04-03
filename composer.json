@@ -3,7 +3,7 @@
     "description": "Some useful functions when you use semantic versioning.",
     "type": "library",
     "license": "Apache-2.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "S.E. Franke",
