@@ -42,7 +42,7 @@ $version = $newSemver->getCurrentVersion();
 
 ## License
 
-Proprietary, see [LICENSE](./LICENSE)
+Apache-2.0, see [LICENSE](./LICENSE)
 
 ## About SEworqs
 Seworqs builds clean, reusable modules for PHP and Mendix developers.
