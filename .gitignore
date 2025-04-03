@@ -1,0 +1,8 @@
+# Composer dependencies
+/vendor/
+
+# IDEs and editors
+/.idea/
+
+# PHPUnit
+/.phpunit.cache/
