@@ -15,7 +15,7 @@ class Semver {
         private readonly int $patch,
         private readonly ?EnumBumpPreReleaseType $preReleaseType = null,
         private readonly int $preReleaseNumber = 0,
-        private readonly string $delimiter = '.',
+        private readonly string $preReleaseDelimiter = '.',
     ) {
 
     }
@@ -58,7 +58,7 @@ class Semver {
 
         if ($this->preReleaseType) {
             $preParts = [$this->preReleaseType->value, $this->preReleaseNumber];
-            $currentVersion .= '-' . implode($this->delimiter, $preParts);
+            $currentVersion .= '-' . implode($this->preReleaseDelimiter, $preParts);
         }
         return  $currentVersion;
     }
@@ -82,7 +82,7 @@ class Semver {
             }
         }
 
-        // Zelfde versie, nu pre-release vergelijken
+        // Same type, check pre/release.
         if ($this->preReleaseType === null && $other->preReleaseType !== null) {
             return 1; // stable > pre-release
         }
@@ -98,11 +98,11 @@ class Semver {
             if ($rankA > $rankB) return 1;
             if ($rankA < $rankB) return -1;
 
-            // Zelfde type, kijk naar pre-release nummer
+            // Same type, check pre/release.
             return $this->preReleaseNumber <=> $other->preReleaseNumber;
         }
 
-        // Helemaal gelijk
+        // Equal
         return 0;
     }
 
@@ -123,15 +123,15 @@ class Semver {
 
     public function isVersionIdenticalTo(Semver $other):bool {
         return $this->isSameVersionAs($other)
-            && $this->delimiter === $other->delimiter;
+            && $this->preReleaseDelimiter === $other->preReleaseDelimiter;
     }
 
     public function isVersionOlderThan(Semver $other):bool {
         return $this->compareVersionTo($other) > 0;
     }
 
-    public function withDelimiter(string $delimiter = '.'): self {
-        if ($delimiter === $this->delimiter) {
+    public function withPreReleaseDelimiter(string $preReleaseDelimiter = '.'): self {
+        if ($preReleaseDelimiter === $this->preReleaseDelimiter) {
             return $this;
         }
 
@@ -141,12 +141,13 @@ class Semver {
             $this->patch,
             $this->preReleaseType,
             $this->preReleaseNumber,
-            $delimiter
+            $preReleaseDelimiter
         );
     }
 
-    public function removeDelimiter(): self {
-        return $this->withDelimiter('');
+
+    public function removePreReleaseDelimiter(): self {
+        return $this->withPreReleaseDelimiter('');
     }
 
     public function bumpVersion(EnumBumpPreReleaseType|EnumBumpReleaseType $releaseType, ?EnumBumpPreReleaseType $preReleaseType = null) {
@@ -168,7 +169,7 @@ class Semver {
                 $this->patch,
                 $preType,
                 $preNum,
-                $this->delimiter
+                $this->preReleaseDelimiter
             );
         }
 
@@ -207,7 +208,7 @@ class Semver {
                 $patch,
                 $preType,
                 $preNum,
-                $this->delimiter
+                $this->preReleaseDelimiter
             );
         }
 
@@ -223,4 +224,44 @@ class Semver {
 
         return $next;
     }
+
+    //////////
+    /// DEPRECATED FUNCTIONS
+    //////////
+
+    /**
+     * @deprecated since 1.0.2 Please use withPreReleaseDelimiter(). Will be removed in next major release.
+     *
+     * @param string $preReleaseDelimiter
+     * @return $this|self
+     */
+    public function withDelimiter(string $preReleaseDelimiter = '.'): self {
+
+        trigger_error("The use of withDelimiter() is deprecated. Please use with withPreReleaseDelimiter().");
+
+        if ($preReleaseDelimiter === $this->preReleaseDelimiter) {
+            return $this;
+        }
+
+        return new self(
+            $this->major,
+            $this->minor,
+            $this->patch,
+            $this->preReleaseType,
+            $this->preReleaseNumber,
+            $preReleaseDelimiter
+        );
+    }
+
+    /**
+     * @deprecated since 1.0.2 Please use removePreReleaseDelimiter(). Will be removed in next major release.
+     *
+     * @return $this
+     */
+    public function removeDelimiter(): self {
+        trigger_error("The use of removeDelimiter() is deprecated. Please use with removePreReleaseDelimiter().");
+
+        return $this->withDelimiter('');
+    }
+
 }

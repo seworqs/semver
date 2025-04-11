@@ -42,13 +42,13 @@ class SemverTest extends TestCase {
         $this->expectException(\LogicException::class);
 
         $semver = Semver::fromString('1.0.0');
-        $newVersion = $semver->removeDelimiter()->bumpVersion(EnumBumpPreReleaseType::ALPHA);
+        $newVersion = $semver->removePreReleaseDelimiter()->bumpVersion(EnumBumpPreReleaseType::ALPHA);
     }
 
     public function testPreRelease() {
 
         $semver = Semver::fromString('1.2.3');
-        $newVersion = $semver->withDelimiter('.')->bumpVersion(\Seworqs\Semver\Enum\EnumBumpReleaseType::MINOR, EnumBumpPreReleaseType::ALPHA);
+        $newVersion = $semver->withPreReleaseDelimiter('.')->bumpVersion(\Seworqs\Semver\Enum\EnumBumpReleaseType::MINOR, EnumBumpPreReleaseType::ALPHA);
 
         $this->assertEquals($newVersion->toString(), '1.3.0-alpha.1');
     }

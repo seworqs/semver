@@ -60,7 +60,7 @@ $semverComposer = Semver::fromString('2.5.3-beta1');
  */
 
 // 2.5.3-beta.1 => 2.5.3-beta1
-$semver->removeDelimiter()->toString();
+$semver->removePreReleaseDelimiter()->toString();
 
 /*
  * do you want to convert it to a Composer like version?
@@ -70,11 +70,11 @@ $semver->removeDelimiter()->toString();
 $semverRemovedDot = $semver->bump(EnumBumpPreReleaseType::BETA);
 
 /*
- * You can also use the `removeDelimiter` when bumping. The new instance will not have the delimiter.
+ * You can also use the `removePreReleaseDelimiter` when bumping. The new instance will not have the delimiter.
  */
  
 // 2.5.3-beta.1 => 2.5.3-beta2
-$semverRemovedDotBumped = $semver->bump(EnumBumpPreReleaseType::BETA);
+$semverRemovedDotBumped = $semver->bump(EnumBumpPreReleaseType::BETA)->removePreReleaseDelimiter();
 
 
 /*
