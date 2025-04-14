@@ -1,6 +1,6 @@
 # SEworqs SemVer 
 
-Some useful functions when you use semantic versioning.
+A type-safe, chainable semantic versioning implementation for PHP with support for bumping versions, handling pre-releases, and comparing versions.
 
 ## Installation
 
@@ -36,9 +36,9 @@ $version = $newSemver->getCurrentVersion();
  
 ## Classes and namespaces
 
-| Namespace      | Description                                       |
-|----------------|---------------------------------------------------|
-| Seworqs\Semver | Nice helpers for working with Semantic Versioning |
+| Namespace      | Class  |
+|----------------|--------|
+| Seworqs\Semver | Semver |
 
 ## License
 

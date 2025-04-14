@@ -1,9 +1,13 @@
 {
     "name": "seworqs/semver",
-    "description": "Some useful functions when you use semantic versioning.",
+    "description": "A type-safe, chainable semantic versioning implementation for PHP with support for bumping versions, handling pre-releases, and comparing versions.",
     "type": "library",
     "license": "Apache-2.0",
-    "version": "1.0.2",
+    "keywords": [
+        "semver", "semantic versioning", "version", "bump", "pre-release",
+        "php", "versioning", "compare", "release", "seworqs"
+    ],
+    "version": "1.0.3",
     "authors": [
         {
             "name": "S.E. Franke",
